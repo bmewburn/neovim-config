@@ -43,7 +43,6 @@ vim.cmd(":command! Q q")
 vim.cmd(":command! Qa qa")
 
 -- Color scheme.
-vim.g.falcom_background = 0
 vim.cmd 'colorscheme falcon'
 
 -- Telescope
@@ -69,3 +68,9 @@ require('testing')
 
 -- Vimspector
 require('config/vimspector')
+
+-- Helpers
+function _G.dump(...)
+    local objects = vim.tbl_map(vim.inspect, {...})
+    print(unpack(objects))
+end

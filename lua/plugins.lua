@@ -67,4 +67,7 @@ return require('packer').startup(function()
 
     -- Color scheme
     use 'fenetikm/falcon'
+
+    -- Plugin
+    use '~/.config/nvim/lua/plugin/nvim_context_vt'
 end)
