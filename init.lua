@@ -64,5 +64,8 @@ require('config/lsp')
 -- Ale
 require('config/ale')
 
+-- Testing
+require('testing')
+
 -- Vimspector
 require('config/vimspector')

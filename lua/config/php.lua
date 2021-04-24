@@ -33,7 +33,7 @@ vim.api.nvim_buf_set_keymap(0, '', '<leader>pt',
     [[:call phpactor#Transform()<CR>]],
     opts
 )
-vim.api.nvim_buf_set_keymap(0, '', '<leader>pce', 
+vim.api.nvim_buf_set_keymap(0, '', '<leader>pce',
     [[:call phpactor#ClassExpand()<CR>]],
     opts
 )
@@ -46,7 +46,7 @@ vim.api.nvim_buf_set_keymap(0, '', '<leader>pp',
 vim.api.nvim_exec(
 [[
 autocmd FileType php set iskeyword+=$
-]], 
+]],
 false
 )
 
