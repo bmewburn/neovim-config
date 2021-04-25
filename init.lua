@@ -42,8 +42,9 @@ vim.cmd(":command! Wqa wqa")
 vim.cmd(":command! Q q")
 vim.cmd(":command! Qa qa")
 
--- Color scheme.
+-- Color scheme and gui options.
 vim.cmd 'colorscheme falcon'
+vim.o.guifont = "MesloLGSDZ Nerd Font Mono"
 
 -- Telescope
 require('config/telescope')

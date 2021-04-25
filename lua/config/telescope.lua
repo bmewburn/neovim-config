@@ -9,9 +9,10 @@ require('telescope').setup{
       ".git/*",
       "app/Domain/Smartloader/assets/libs/*"
     },
-    layout_strategy = "flex",
-    preview_cutoff = 120,
-    results_height = 1,
+    layout_strategy = "center",
+    preview_cutoff = 10,
+    preview_height = 10,
+    results_height = 10,
     winblend = 10
   }
 }
@@ -50,6 +51,6 @@ vim.api.nvim_set_keymap('n', '<leader>gs',
     {}
 );
 vim.api.nvim_set_keymap('n', '<leader>fs',
-    "lua require'telescope.builtin'.lsp_workspace_symbols({ query = vim.fn.input('Query >') })<CR>",
+    ":Telescope lsp_dynamic_workspace_symbols<CR>",
     {}
 );
