@@ -1,4 +1,3 @@
-require('plugins')
 
 -- Basic configs.
 vim.wo.number = true
@@ -8,6 +7,11 @@ vim.api.nvim_set_option('cursorline', true)
 vim.api.nvim_set_option('mouse', 'a')
 vim.api.nvim_set_option('termguicolors', true)
 vim.api.nvim_set_option('clipboard', 'unnamedplus')
+vim.api.nvim_set_option('expandtab', true)
+vim.api.nvim_set_option('tabstop', 4)
+
+-- Plugins
+require('plugins')
 
 -- Split layout
 vim.api.nvim_set_option('splitbelow', true)
@@ -17,6 +21,14 @@ vim.api.nvim_set_option('splitright', true)
 vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent=true})
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+-- Autoformat
+vim.api.nvim_exec(
+[[
+autocmd BufWritePre *.dart lua vim.lsp.buf.formatting()
+]]
+,
+false)
 
 -- Indentation
 vim.api.nvim_exec(
@@ -43,7 +55,6 @@ vim.cmd(":command! Q q")
 vim.cmd(":command! Qa qa")
 
 -- Color scheme and gui options.
-vim.cmd 'colorscheme falcon'
 vim.o.guifont = "MesloLGSDZ Nerd Font Mono"
 
 -- Telescope
@@ -66,9 +77,6 @@ require('config/ale')
 
 -- Testing
 require('testing')
-
--- Vimspector
-require('config/vimspector')
 
 -- Helpers
 function _G.dump(...)

@@ -4,10 +4,19 @@ require('telescope').setup{
       "nuts/*",
       "node_modules/*",
       "external_data/*",
-      "vendor/*",
       ".idea/*",
       ".git/*",
       "app/Domain/Smartloader/assets/libs/*"
+    },
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case',
+      '-u'
     },
     layout_strategy = "center",
     preview_cutoff = 10,
@@ -19,11 +28,11 @@ require('telescope').setup{
 
 -- Telescope
 vim.api.nvim_set_keymap('n', '<C-p>',
-    ':Telescope find_files<CR>',
+    [[:lua require('telescope.builtin').find_files({find_command = {'rg', '--files', '-u'}})<CR>]],
     {}
 );
 vim.api.nvim_set_keymap('n', '<C-a>',
-    ':Telescope find_files<CR>',
+    ':Telescope commands<CR>',
     {}
 );
 vim.api.nvim_set_keymap('n', '<C-f>',

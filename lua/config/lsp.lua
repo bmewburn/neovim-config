@@ -52,29 +52,65 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   }
 }
 
+local on_attach = function(client, buffer)
+  require'lsp_signature'.on_attach();
+end
+
 --
 -- Setup the lsp configs.
 --
 
 -- Rust
-lspconfig.rls.setup{
+-- curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-mac -o ~/.local/bin/rust-analyzer
+lspconfig.rust_analyzer.setup{
+  cmd = {'/Users/rob/.local/bin/rust-analyzer'},
   capabilities = capabilities,
+  on_attach = on_attach
 }
 
 -- C
 lspconfig.sourcekit.setup{}
 
+-- Dart
+lspconfig.dartls.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+  init_options = {
+    closingLabels = true,
+    flutterOutline = true,
+    onlyAnalyzeProjectsWithOpenFiles = true,
+    outline = true,
+    suggestFromUnimportedLibraries = true
+  }
+}
+
 -- Vue
 lspconfig.vuels.setup{
   capabilities = capabilities,
+  on_attach = on_attach
 }
 
 -- TS
 lspconfig.tsserver.setup{
   capabilities = capabilities,
+  on_attach = on_attach
 }
 
--- For php see php.lua
+-- PHPActor
+lspconfig.phpactor.setup{
+  cmd = {"/Users/rob/.local/share/nvim/site/pack/packer/opt/phpactor/bin/phpactor", "language-server"},
+  capabilities = capabilities,
+  on_attach = on_attach
+}
+
+--lspconfig.intelephense.setup{
+--  capabilities = capabilities,
+--  on_attach = on_attach,
+--  init_options = {
+--    licenceKey = os.getenv('INTELEPHENSELICENCE'),
+--  },
+--}
+
 
 -- nvim-compe setup
 --
@@ -121,10 +157,13 @@ vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
+-- Format document
+vim.api.nvim_set_keymap("n", "<leader>fd", ":lua vim.lsp.buf.formatting()<CR>", {silent = true})
+
 -- LspSaga
 vim.api.nvim_set_keymap("n", "<leader>a", ":Lspsaga code_action<CR>", {silent = true})
 vim.api.nvim_set_keymap("v", "<leader>a", ":<C-U>Lspsaga range_code_action<CR>", {silent = true})
-vim.api.nvim_set_keymap("n", "gd", ":Lspsaga lsp_finder<CR>", {silent = true})
+vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", {silent = true})
 vim.api.nvim_set_keymap("n", "gr", ":Lspsaga lsp_finder<CR>", {silent = true})
 vim.api.nvim_set_keymap("n", "K", ":Lspsaga hover_doc<CR>", {silent = true})
 vim.api.nvim_set_keymap("n", "<leader>en", ":Lspsaga diagnostic_jump_next<CR>", {silent = true})

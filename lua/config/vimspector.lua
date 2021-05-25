@@ -38,6 +38,10 @@ vim.api.nvim_set_keymap("n", "<leader>dn",
     "<Plug>VimspectorContinue<CR>",
     {}
 )
+vim.api.nvim_set_keymap("n", "<leader>df",
+    "<Plug>VimspectorStepInto<CR>",
+    {}
+)
 vim.api.nvim_set_keymap("n", "<leader>dq",
     "<Plug>VimspectorStop<CR>",
     {}

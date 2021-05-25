@@ -10,17 +10,8 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   }
 }
 
--- PHPActor
---lspconfig.phpactor.setup{capabilities = capabilities}
-lspconfig.intelephense.setup{
-  capabilities = capabilities,
-  init_options = {
-    licenceKey = os.getenv('INTELEPHENSELICENCE'),
-  },
-}
-
 -- Php specific key maps.
-local opts = { noremap=true, silent=true }
+local opts = { silent=true }
 vim.api.nvim_set_keymap('x', '<leader>em',
     [[:<C-U>call phpactor#ExtractMethod(visualmode())<CR>]],
     opts
@@ -29,15 +20,15 @@ vim.api.nvim_set_keymap('x', '<leader>ee',
     [[:<C-U>call phpactor#ExtractExpression(visualmode())<CR>]],
     opts
 )
-vim.api.nvim_buf_set_keymap(0, '', '<leader>pt',
+vim.api.nvim_set_keymap('n', '<leader>pt',
     [[:call phpactor#Transform()<CR>]],
     opts
 )
-vim.api.nvim_buf_set_keymap(0, '', '<leader>pce',
+vim.api.nvim_set_keymap('n', '<leader>pce',
     [[:call phpactor#ClassExpand()<CR>]],
     opts
 )
-vim.api.nvim_buf_set_keymap(0, '', '<leader>pp',
+vim.api.nvim_set_keymap('n', '<leader>pp',
     [[:call phpactor#ContextMenu()<CR>]],
     opts
 )
