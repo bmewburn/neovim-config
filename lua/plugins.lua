@@ -43,6 +43,7 @@ return require('packer').startup(function()
             'nvim-lua/popup.nvim'
 	}
     }
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- LSP related stuff.
     use { 'hrsh7th/nvim-compe',

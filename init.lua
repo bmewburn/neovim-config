@@ -49,10 +49,13 @@ false
 
 -- I am to slow to release some keys
 vim.cmd(":command! W w")
-vim.cmd("command! Wq wq")
+vim.cmd(":command! Wq wq")
 vim.cmd(":command! Wqa wqa")
 vim.cmd(":command! Q q")
 vim.cmd(":command! Qa qa")
+-- I keep using q accidentally too frequent.
+vim.cmd("nnoremap Q q")
+vim.cmd("nnoremap q <Nop>")
 
 -- Color scheme and gui options.
 vim.o.guifont = "MesloLGSDZ Nerd Font Mono"

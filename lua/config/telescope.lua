@@ -12,6 +12,7 @@ base_ignore_patterns = {
       "public/css/*",
       "public/libs/*",
       "public/vendor/*",
+      "public/assets/*",
 }
 
 require('telescope').setup{
@@ -27,24 +28,34 @@ require('telescope').setup{
       '--smart-case',
       '-u'
     },
+    extensions = {
+      fzf = {
+        fuzzy = true,                    -- false will only do exact matching
+        override_generic_sorter = true, -- override the generic sorter
+        override_file_sorter = true,     -- override the file sorter
+        case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+      }
+    },
     layout_strategy = "vertical",
     preview_height = 10,
     winblend = 15
   }
 }
 
+require('telescope').load_extension('fzf')
+
 function _G.findFilesNoVendor()
   ignore_table = base_ignore_patterns;
-  table.insert(ignore_table, "vendor/.*");
-  require('telescope.builtin').find_files{file_ignore_patterns = ignore_table, find_command = {'rg', '--files', '-u'}}
+  table.insert(ignore_table, "vendor/*");
+  require('telescope.builtin').find_files{file_ignore_patterns = ignore_table}
 end
 
 function _G.searchFilesNoVendor()
   ignore_table = base_ignore_patterns;
-  table.insert(ignore_table, "vendor/.*");
+  table.insert(ignore_table, "vendor/*");
   table.insert(ignore_table, "composer.lock");
   table.insert(ignore_table, "package-lock.json");
-  require('telescope.builtin').live_grep{file_ignore_patterns = ignore_table, debounce = 100}
+  require('telescope.builtin').live_grep{file_ignore_patterns = ignore_table}
 end
 
 
