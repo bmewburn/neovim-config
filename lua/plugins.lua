@@ -19,9 +19,13 @@ return require('packer').startup(function()
             vim.g.nvim_tree_ignore = {".git", ".idea", ".DS_Store"}
         end
     }
-    use { 'lewis6991/gitsigns.nvim',
-    	config = function() require'gitsigns'.setup() end,
-    	requires = { 'nvim-lua/plenary.nvim' }
+    use {
+        'tanvirtin/vgit.nvim',
+        requires = 'nvim-lua/plenary.nvim',
+        config = function ()
+            require('vgit').setup()
+        end
+
     }
     use {
         'akinsho/nvim-bufferline.lua',
@@ -32,11 +36,12 @@ return require('packer').startup(function()
     }
 
     -- Telescope
+    use {'nvim-lua/plenary.nvim', branch='async_jobs_v2'}
     use { 'nvim-telescope/telescope.nvim',
+        branch = 'async_v2',
     	requires = {
-            'nvim-lua/popup.nvim',
-	        'nvim-lua/plenary.nvim'
-	    }
+            'nvim-lua/popup.nvim'
+	}
     }
 
     -- LSP related stuff.
@@ -53,6 +58,20 @@ return require('packer').startup(function()
       requires = "kyazdani42/nvim-web-devicons",
       config = function()
           require("trouble").setup {}
+
+          -- KeyMap
+          vim.api.nvim_set_keymap('n', '<leader>gd', ':VGit diff<CR>', {
+              noremap = true,
+              silent = true,
+          })
+          vim.api.nvim_set_keymap('n', '<leader>gh', ':VGit buffer_history<CR>', {
+              noremap = true,
+              silent = true,
+          })
+          vim.api.nvim_set_keymap('n', '<leader>gp', ':VGit hunk_preview<CR>', {
+              noremap = true,
+              silent = true,
+          })
       end
     }
 
@@ -71,12 +90,6 @@ return require('packer').startup(function()
     use 'w0rp/ale'
 
     -- Debugging
-    --use {
-    --    'puremourning/vimspector',
-    --     config = function()
-    --        require('config/vimspector')
-    --   end
-    --}
     use {
         'mfussenegger/nvim-dap',
         config = function()
@@ -90,8 +103,8 @@ return require('packer').startup(function()
             vim.api.nvim_set_option('termguicolors', true)
             require("dapui").setup({
                 icons = {
-                    expanded = ">",
-                    collapsed = "<",
+                    expanded = "",
+                    collapsed = "",
                     circular = "↺"
                 },
                 sidebar = {
@@ -111,20 +124,40 @@ return require('packer').startup(function()
     end
     }
 
+    -- Laravel
+    use {
+      'noahfrederick/vim-laravel',
+      requires = {
+        'noahfrederick/vim-composer',
+        'tpope/vim-projectionist',
+        'tpope/vim-dispatch',
+      }
+    }
+
     -- Testing
     use 'vim-test/vim-test'
 
     -- Handy
     use 'tpope/vim-surround'
-    use 'tpope/vim-fugitive'
     use 'tpope/vim-sleuth'
+
+
+    -- Commenter
+    use {
+        'terrortylor/nvim-comment',
+        config = function()
+            require('nvim_comment').setup()
+        end
+    }
 
     -- Color scheme
     use {
-        'famiu/feline.nvim',
-        config = function()
-            require('feline').setup()
-        end
+        'glepnir/galaxyline.nvim',
+        branch = 'main',
+        config = function() require'sl' end,
+        requires = {
+            'kyazdani42/nvim-web-devicons',
+        }
     }
     use {
         'marko-cerovac/material.nvim',
@@ -167,5 +200,5 @@ return require('packer').startup(function()
     }
 
     -- Plugin
-    use '~/.config/nvim/lua/plugin/nvim_context_vt'
+    use 'haringsrob/nvim_context_vt'
 end)

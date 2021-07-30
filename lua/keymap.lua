@@ -26,6 +26,6 @@ vim.api.nvim_set_keymap('n', '<leader>bd',
     {silent = true}
 );
 vim.api.nvim_set_keymap('n', '<leader>bc',
-    ":bufdo bd<CR>",
+    ":bufdo Bdelete<CR>",
     {silent = true}
 );

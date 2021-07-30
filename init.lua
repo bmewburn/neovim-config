@@ -78,6 +78,9 @@ require('config/ale')
 -- Testing
 require('testing')
 
+-- Laravel helpers
+require('config/laravel')
+
 -- Helpers
 function _G.dump(...)
     local objects = vim.tbl_map(vim.inspect, {...})

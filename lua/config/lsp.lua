@@ -97,19 +97,19 @@ lspconfig.tsserver.setup{
 }
 
 -- PHPActor
-lspconfig.phpactor.setup{
-  cmd = {"/Users/rob/.local/share/nvim/site/pack/packer/opt/phpactor/bin/phpactor", "language-server"},
-  capabilities = capabilities,
-  on_attach = on_attach
-}
-
---lspconfig.intelephense.setup{
+--lspconfig.phpactor.setup{
+--  cmd = {"php", "-dxdebug.mode=off", "/Users/rob/.local/share/nvim/site/pack/packer/opt/phpactor/bin/phpactor", "language-server"},
 --  capabilities = capabilities,
---  on_attach = on_attach,
---  init_options = {
---    licenceKey = os.getenv('INTELEPHENSELICENCE'),
---  },
---}
+-- on_attach = on_attach
+--
+
+lspconfig.intelephense.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+  init_options = {
+    licenceKey = os.getenv('INTELEPHENSELICENCE'),
+  },
+}
 
 
 -- nvim-compe setup

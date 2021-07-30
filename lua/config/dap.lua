@@ -42,7 +42,7 @@ vim.api.nvim_set_keymap("n", "<leader>dk",
   {silent = true}
 )
 vim.api.nvim_set_keymap("n", "<leader>df",
-  ":lua require'dap'.step_info()<CR>",
+  ":lua require'dap'.step_into()<CR>",
   {silent = true}
 )
 vim.api.nvim_set_keymap("n", "<leader>dc",
@@ -50,11 +50,11 @@ vim.api.nvim_set_keymap("n", "<leader>dc",
   {silent = true}
 )
 vim.api.nvim_set_keymap("n", "<leader>dr",
-  ":lua require'dap'.disconnect()<CR>",
+  ":lua require'dap'.disconnect()<CR>:lua require'dap'.close()<CR>:lua require('dapui').close()<CR>",
   {silent = true}
 )
-vim.api.nvim_set_keymap("n", "<leader>ds",
-  ":lua require'dap'.status()<CR>",
+vim.api.nvim_set_keymap("n", "<leader>dq",
+  ":lua require'dap'.close()<CR>:lua require('dapui').close()<CR>",
   {silent = true}
 )
 vim.api.nvim_set_keymap("n", "<leader>dh",
